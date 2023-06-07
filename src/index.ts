@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite } from 'pixi.js'
+import { Application, Assets, Container, Sprite } from 'pixi.js'
 
 const app = new Application({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
@@ -10,18 +10,24 @@ const app = new Application({
 });
 
 
-Assets.add('clampy','clampy.png');
-Assets.add('bicho','bicho.png');
+Assets.add('Casco','casco.png');
+Assets.add('Bicho','bicho.png');
 
-Assets.load(['clampy','bicho']).then(()=>{
-	const clampy: Sprite = Sprite.from('bicho');
-	
-	//clampy.anchor.set(0.5);
-	//clampy.x = clampy.width /2;
-	//clampy.y = clampy.height /2;
+Assets.load(['Casco','Bicho']).then(()=>{
 
-	console.log(clampy.width , clampy.height,clampy);
+	const bicho: Sprite = Sprite.from('Bicho');
+	bicho.scale.set(0.5);
 
-	app.stage.addChild(clampy);
+	const casco: Sprite = Sprite.from('Casco');
+	casco.scale.set(0.35);
+	casco.position.set(93,-4);
+	casco.rotation=-Math.PI/9;
+
+	const bichoandcasco: Container = new Container();
+	bichoandcasco.position.set(100,100);
+
+	app.stage.addChild(bichoandcasco);
+	bichoandcasco.addChild(bicho);
+	bichoandcasco.addChild(casco);
 })
 

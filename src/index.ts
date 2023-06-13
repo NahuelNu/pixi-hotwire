@@ -1,4 +1,6 @@
-import { Application, Assets, Container, Sprite } from 'pixi.js'
+import { Application, Assets } from 'pixi.js'
+import { assets } from './assets';
+import { BichoHat } from './BichoHat';
 
 const app = new Application({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
@@ -10,25 +12,16 @@ const app = new Application({
 });
 
 
-Assets.add('Casco','casco.png');
-Assets.add('Bicho','bicho.png');
+Assets.addBundle('myAssets',assets);
+Assets.loadBundle('myAssets').then(()=>{
 
-Assets.load(['Casco','Bicho']).then(()=>{
+	
 
-	const bicho: Sprite = Sprite.from('Bicho');
-	bicho.scale.set(0.5);
-
-	const casco: Sprite = Sprite.from('Casco');
-	casco.scale.set(0.35);
-	casco.position.set(93,-4);
-	casco.rotation = -Math.PI/9;
-
-	const bichoandcasco: Container = new Container();
+	const bichoandcasco: BichoHat = new BichoHat();
 	bichoandcasco.position.set(192,92);
 
 	app.stage.addChild(bichoandcasco);
-	bichoandcasco.addChild(bicho);
-	bichoandcasco.addChild(casco);
+	
 })
 
 addEventListener("resize",()=>{
@@ -49,5 +42,4 @@ addEventListener("resize",()=>{
 	(app.view.style as any).marginTop= marginVertical+"px";
 	
 });
-
 dispatchEvent(new Event("resize"));

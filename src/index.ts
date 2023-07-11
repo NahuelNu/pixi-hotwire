@@ -1,6 +1,6 @@
 import { Application, Assets } from 'pixi.js'
 import { assets } from './assets';
-import { BichoHat } from './BichoHat';
+import {SceneBichoHat} from './SceneBichoHat';
 
 const app = new Application({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
@@ -13,17 +13,14 @@ const app = new Application({
 
 
 Assets.addBundle('myAssets',assets);
+
 Assets.loadBundle('myAssets').then(()=>{
-
-	
-
-	const bichoandcasco: BichoHat = new BichoHat();
-	bichoandcasco.position.set(192,92);
-
-	app.stage.addChild(bichoandcasco);
+	const sceneBicho = new SceneBichoHat();
+	app.stage.addChild(sceneBicho);
 	
 })
 
+//Siempre centrado y manteniendo escala en pantalla
 addEventListener("resize",()=>{
 	let scaleX = window.innerWidth /app.screen.width;
 	let scaleY = window.innerHeight /app.screen.height;

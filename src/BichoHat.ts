@@ -13,5 +13,9 @@ export class BichoHat extends Container{
         
         this.addChild(bicho);
 	    this.addChild(casco);
+
+		const alienV: Sprite = Sprite.from('alien1');
+
+		this.addChild(alienV);
     }
 }

@@ -1,6 +1,7 @@
 import { Application, Assets } from 'pixi.js'
 import { assets } from './assets';
-import {SceneBichoHat} from './SceneBichoHat';
+//import {SceneBichoHat} from './SceneBichoHat';
+import { SceneLevelComplete } from './SceneLevelComplete';
 
 const app = new Application({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
@@ -15,8 +16,11 @@ const app = new Application({
 Assets.addBundle('myAssets',assets);
 
 Assets.loadBundle('myAssets').then(()=>{
-	const sceneBicho = new SceneBichoHat();
-	app.stage.addChild(sceneBicho);
+	//const sceneBicho = new SceneBichoHat();
+	//app.stage.addChild(sceneBicho);
+
+	const sceneLevelComplete = new SceneLevelComplete();
+	app.stage.addChild(sceneLevelComplete);
 	
 })
 
@@ -35,8 +39,8 @@ addEventListener("resize",()=>{
 	let marginHorizontal = Math.floor((window.innerWidth - gameWidth)/2);  
 	let marginVertical = Math.floor((window.innerHeight-gameHeight)/2);
 
-	(app.view.style as any).marginLeft= marginHorizontal+"px";
-	(app.view.style as any).marginTop= marginVertical+"px";
+	(app.view as HTMLCanvasElement).style.marginLeft= marginHorizontal+"px";
+	(app.view as HTMLCanvasElement).style.marginTop= marginVertical+"px";
 	
 });
 dispatchEvent(new Event("resize"));
